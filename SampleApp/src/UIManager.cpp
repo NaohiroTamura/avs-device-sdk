@@ -16,6 +16,7 @@
 #include <iostream>
 #include <sstream>
 
+#include <cstdlib>
 #include "SampleApp/UIManager.h"
 
 #include <AVSCommon/SDKInterfaces/DialogUXStateObserverInterface.h>
@@ -817,9 +818,15 @@ void UIManager::printState() {
         switch (m_dialogState) {
             case DialogUXState::IDLE:
                 ConsolePrinter::prettyPrint("Alexa is currently idle!");
+                // assume that the current directory is sdk-build, a sibling directory of sdk-source,
+                // in which "./SampleApp/src/SampleApp" got invoked.
+                system("play ../sdk-source/avs-device-sdk/sounds/ful_ui_endpointing.wav");
                 return;
             case DialogUXState::LISTENING:
                 ConsolePrinter::prettyPrint("Listening...");
+                // assume that the current directory is sdk-build, a sibling directory of sdk-source,
+                // in which "./SampleApp/src/SampleApp" got invoked.
+                system("play ../sdk-source/avs-device-sdk/sounds/ful_ui_wakesound.wav");
                 return;
             case DialogUXState::EXPECTING:
                 ConsolePrinter::prettyPrint("Expecting...");
